@@ -13,11 +13,13 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 			http.NotFound(w, r)
 			return
 	}
-	fmt.Fprint(w, "Salut, Yann!")
+	fmt.Fprint(w, "Hello, world!")
 }
 
 func main() {
-	http.HandleFunc("/", indexHandler)
+	// http.HandleFunc("/", indexHandler)
+
+	http.Handle("/", http.FileServer(http.Dir("./static")))
 
 	port := os.Getenv("PORT")
 	if port == "" {
